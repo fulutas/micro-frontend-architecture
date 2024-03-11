@@ -1,0 +1,12 @@
+{
+    "packages": ["main","delivery","order","product"],
+    "version": "independent",
+    "useWorkspaces": true,
+    "npmClient": "yarn",
+    "command": {
+      "version": {
+        "allowBranch": "master"
+      }
+    }
+  }
+  

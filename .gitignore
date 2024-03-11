@@ -1,0 +1,9 @@
+/node_modules
+delivery/node_modules
+main/node_modules
+monolith/node_modules
+order/node_modules
+product/node_modules
+.vscode/
+.idea/
+.DS_Store
