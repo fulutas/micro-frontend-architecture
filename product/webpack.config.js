@@ -4,6 +4,8 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
   output: {
+    filename: '[name].js',
+    chunkFilename: '[name].[contenthash].js',
     publicPath: "http://localhost:9001/",
   },
 
