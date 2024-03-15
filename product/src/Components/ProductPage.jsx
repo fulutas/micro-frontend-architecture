@@ -6,7 +6,6 @@ import axios from 'axios';
 import { useStore } from "main/globalStore"
 
 export default ({ loading, setLoading }) => {
-
   const { productId } = useParams();
   const [product, setProduct] = useState({});
   const { countValue, countChange } = useStore()

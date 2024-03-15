@@ -50,7 +50,8 @@ module.exports = (_, argv) => ({
       },
       exposes: {
         "./ProductApp": "./src/App.jsx",
-        "./ProductCard": "./src/Components/ProudctCard.jsx"
+        "./ProductCard": "./src/Components/ProudctCard.jsx",
+        "./ProductStore" : "./src/redux/slices/productStore.js"
       },
       shared: {
         ...deps,
