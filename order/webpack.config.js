@@ -1,11 +1,14 @@
+const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
   output: {
     filename: '[name].js',
     chunkFilename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, "dist"),
     publicPath: "http://localhost:9002/",
   },
 
@@ -60,6 +63,10 @@ module.exports = (_, argv) => ({
           requiredVersion: deps["react-dom"],
         },
       },
+    }),
+    new CleanWebpackPlugin({
+      protectWebpackAssets: false,
+      cleanAfterEveryBuildPatterns: ["*.LICENSE.txt"],
     }),
     new HtmlWebPackPlugin({
       template: "./src/index.html",

@@ -1,11 +1,14 @@
+const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
 const deps = require("./package.json").dependencies;
 module.exports = (_, argv) => ({
   output: {
-    filename: '[name].js',
-    chunkFilename: '[name].[contenthash].js',
+    filename: "[name].js",
+    chunkFilename: "[name].[contenthash].js",
+    path: path.resolve(__dirname, "dist"),
     publicPath: "http://localhost:9000/",
   },
 
@@ -46,12 +49,12 @@ module.exports = (_, argv) => ({
       name: "main",
       filename: "remoteEntry.js",
       remotes: {
-        "product": "product@http://localhost:9001/product-app.js",
-        "order":"order@http://localhost:9002/order-app.js",
-        "delivery":"delivery@http://localhost:9003/delivery-app.js",
+        product: "product@http://localhost:9001/product-app.js",
+        order: "order@http://localhost:9002/order-app.js",
+        delivery: "delivery@http://localhost:9003/delivery-app.js",
       },
       exposes: {
-        './globalStore' : './src/redux/slices/globalStore.js',
+        "./globalStore": "./src/redux/slices/globalStore.js",
       },
       shared: {
         ...deps,
@@ -68,6 +71,10 @@ module.exports = (_, argv) => ({
           requiredVersion: deps["react-router-dom"],
         },
       },
+    }),
+    new CleanWebpackPlugin({
+      protectWebpackAssets: false,
+      cleanAfterEveryBuildPatterns: ["*.LICENSE.txt"],
     }),
     new HtmlWebPackPlugin({
       template: "./src/index.html",
